@@ -1,0 +1,233 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 40px; background: #fff;
+  border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; }
+.nav-logo img { width: 50px; height: 50px; object-fit: contain; }
+.logo-text h1 { font-size: 20px; font-weight: 700; color: #111; }
+.logo-text p { font-size: 11px; color: #888; font-weight: 500; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.nav-btn {
+  color: #333; text-decoration: none;
+  padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  transition: all 0.2s; background: #f0f0f0; border: 1px solid #e0e0e0;
+}
+.nav-btn:hover { background: #e0e0e0; }
+.nav-btn.active { background: #1e1e1e; color: #fff; border-color: #1e1e1e; }
+.btn-profile {
+  width: 40px; height: 40px; border-radius: 50%; background: #e8dbf2;
+  color: #784ba0; font-size: 13px; font-weight: 700; display: flex;
+  align-items: center; justify-content: center; text-decoration: none;
+  transition: transform 0.2s; border: 2px solid transparent;
+}
+.btn-profile:hover { transform: scale(1.08); }
+.btn-profile.active { border-color: #784ba0; box-shadow: 0 0 0 2px rgba(120, 75, 160, 0.3); }
+.btn-logout {
+  color: #be3835; text-decoration: none; font-size: 13px; font-weight: 600;
+  border: 1.5px solid #be3835; border-radius: 20px; padding: 6px 14px;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: #be3835; color: white; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #1a1a1a; color: #aaa; text-align: center;
+  padding: 24px 40px; font-size: 13px; margin-top: auto;
+}
+footer strong { color: #fff; }
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  padding: 40px 40px 20px;
+}
+.page-header h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+.page-header p {
+  font-size: 14px;
+  color: #888;
+  font-weight: 400;
+}
+.page-header p strong { color: #be3835; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  margin: 0 40px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+.search-wrap svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+.search-wrap input {
+  width: 100%;
+  border: 1.5px solid #e5e5e5;
+  border-radius: 9px;
+  padding: 10px 14px 10px 38px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.18s;
+  background: #fafafa;
+}
+.search-wrap input:focus { border-color: #be3835; background: #fff; }
+
+.category-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.category-pills a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: #eee;
+  color: #666;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+.category-pills a:hover { background: #ddd; color: #333; }
+.category-pills a.pill-active { background: #8c1515; color: #fff; }
+
+.sort-select {
+  border: 1.5px solid #e5e5e5;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #555;
+  background: #fafafa;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s;
+}
+.sort-select:focus { border-color: #be3835; }
+
+/* ===== BOOKS GRID ===== */
+.books-section { padding: 0 40px 60px; }
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+}
+
+.book-cover {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+.book-cover-placeholder {
+  width: 100%;
+  height: 240px;
+  background: linear-gradient(135deg, #8c1515, #be3835);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.book-body {
+  padding: 15px;
+}
+.book-body h5 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  min-height: 40px;
+}
+.book-body .book-author {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status-badge {
+  display: inline-block;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+.status-available    { background: #d4edda; color: #155724; }
+.status-unavailable  { background: #f8d7da; color: #721c24; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: #aaa;
+}
+.empty-state svg { display: block; margin: 0 auto 20px; }
+.empty-state h4 { font-size: 18px; font-weight: 600; color: #bbb; margin-bottom: 6px; }
+.empty-state p  { font-size: 14px; }
+
+@media (max-width: 900px) {
+    .navbar { padding: 12px 20px; }
+    .nav-actions { gap: 8px; }
+    .nav-btn { padding: 8px 12px; font-size: 12px; }
+    .logo-text h1 { font-size: 16px; }
+}
+@media (max-width: 768px) {
+  .logo-text p { display: none; }
+  .navbar { flex-wrap: wrap; gap: 10px; justify-content: center; padding: 12px 10px; }
+  .nav-actions { justify-content: center; width: 100%; flex-wrap: wrap; }
+  .page-header, .books-section { padding-left: 20px; padding-right: 20px; }
+  .filter-bar { margin: 0 20px 24px; padding: 16px 20px; flex-direction: column; align-items: stretch; }
+  .books-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+}

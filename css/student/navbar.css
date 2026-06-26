@@ -1,0 +1,168 @@
+/* Responsive Student Navbar Hamburger Menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.mobile-menu-toggle:hover {
+    background: #f0f0f0;
+}
+.mobile-menu-toggle svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block !important;
+    }
+    header.navbar {
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        padding: 12px 20px !important;
+        gap: 0 !important;
+        position: relative !important;
+    }
+    header.navbar .nav-logo {
+        display: flex !important;
+        align-items: center !important;
+    }
+    header.navbar .nav-actions {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        background: #fff !important;
+        border-bottom: 2px solid #e0e0e0 !important;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+        flex-direction: column !important;
+        padding: 20px !important;
+        gap: 12px !important;
+        z-index: 999 !important;
+        align-items: stretch !important;
+    }
+    header.navbar .nav-actions.show {
+        display: flex !important;
+    }
+    header.navbar .nav-btn, 
+    header.navbar .btn-profile, 
+    header.navbar .btn-logout {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+    header.navbar .btn-profile {
+        border-radius: 8px !important;
+        height: auto !important;
+        padding: 10px !important;
+        background: #e8dbf2 !important;
+        color: #784ba0 !important;
+        border: 1px solid #784ba0 !important;
+    }
+}
+
+/* ---- CUSTOM CONFIRMATION DIALOG ---- */
+.custom-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.custom-confirm-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.custom-confirm-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.custom-confirm-overlay.active .custom-confirm-card {
+    transform: scale(1) translateY(0);
+}
+.custom-confirm-icon {
+    width: 56px;
+    height: 56px;
+    background: #fdf2f2;
+    color: #be3835;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+.custom-confirm-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+}
+.custom-confirm-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+.custom-confirm-message {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+.custom-confirm-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+.custom-confirm-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+.custom-confirm-btn.btn-cancel {
+    background: #eee;
+    color: #444;
+}
+.custom-confirm-btn.btn-cancel:hover {
+    background: #e0e0e0;
+}
+.custom-confirm-btn.btn-confirm {
+    background: linear-gradient(135deg, #8c1515, #be3835);
+    color: #fff;
+}
+.custom-confirm-btn.btn-confirm:hover {
+    opacity: 0.95;
+    box-shadow: 0 4px 12px rgba(190, 56, 53, 0.25);
+}

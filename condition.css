@@ -1,0 +1,168 @@
+/* --- Global Resets & Typography --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #ede2e1; /* Reuses the warm tint background seen in your site containers */
+    color: #333333;
+    padding-bottom: 60px;
+}
+
+/* --- Navbar Layout --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-text h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111111;
+}
+
+.logo-text p {
+    font-size: 12px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.btn-home {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-home:hover {
+    background-color: #333333;
+}
+
+/* --- Layout Structure --- */
+.terms-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.terms-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.terms-header h2 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    color: #111111;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.terms-header p {
+    font-size: 14px;
+    color: #555555;
+}
+
+/* --- Document Board Sheet --- */
+.terms-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px 50px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.terms-section {
+    margin-bottom: 30px;
+}
+
+.terms-section:last-child {
+    margin-bottom: 0;
+}
+
+.terms-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b2240; /* Dark premium corporate blue accent */
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 6px;
+}
+
+.terms-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444444;
+    text-align: justify;
+}
+
+/* Standard Bullet Configurations */
+.terms-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.terms-section ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444444;
+}
+
+.terms-section ul li::before {
+    content: "•";
+    color: #0b2240;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top: -2px;
+}
+
+/* --- Highlighted National Policy Framing --- */
+.law-box {
+    background-color: #f7f9fa;
+    border-left: 4px solid #b25252; /* Deep red highlight bar matching schedule styling */
+    padding: 15px 20px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 0 6px 6px 0;
+}
+
+.law-box h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 6px;
+}
+
+.law-box p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #555555;
+}

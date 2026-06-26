@@ -1,0 +1,289 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f0f0f0;
+}
+
+/* ── Header ── */
+.site-header {
+    background: #ffffff;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    flex-shrink: 0;
+    z-index: 10;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.header-left img {
+    height: 55px;
+    width: auto;
+}
+.header-left .site-title h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    color: #111111;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.header-left .site-title p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #222222;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+.header-right a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #be3835;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: 1.5px solid #be3835;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+.header-right a:hover {
+    background: #be3835;
+    color: #fff;
+}
+
+/* ── Main container ── */
+.main-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+}
+
+/* ── Form header ── */
+.form-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.form-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+.form-header p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ── Banner messages ── */
+.banner-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.banner-error {
+    background: #fff0f0;
+    border: 1px solid #f5c6c6;
+    color: #be3835;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ── Form card ── */
+.form-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Field styling ── */
+.field-row {
+    margin-bottom: 20px;
+}
+.field-row label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.field-row input[type="text"],
+.field-row input[type="email"],
+.field-row input[type="tel"],
+.field-row input[type="password"],
+.field-row input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.field-row input:focus {
+    border-color: #be3835;
+}
+
+/* ── Gender pills ── */
+.gender-pills {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+}
+.gender-pills input[type="radio"] {
+    display: none;
+}
+.gender-pills label {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 20px;
+    background: #eeeeee;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    margin-bottom: 0;
+    transition: background 0.2s, color 0.2s;
+    border: 1.5px solid transparent;
+    user-select: none;
+}
+.gender-pills input[type="radio"]:checked + label {
+    background: #8c1515;
+    color: #ffffff;
+    border-color: #8c1515;
+}
+.gender-pills label:hover {
+    border-color: #be3835;
+}
+
+/* ── Birth date row ── */
+.birth-row {
+    display: flex;
+    gap: 10px;
+}
+.birth-row input {
+    flex: 1;
+    padding: 12px 10px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.birth-row input:focus {
+    border-color: #be3835;
+}
+
+/* ── Terms checkbox ── */
+.terms-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+.terms-row input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: #be3835;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.terms-row span {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+}
+.terms-row a {
+    color: #be3835;
+    text-decoration: none;
+    font-weight: 600;
+}
+.terms-row a:hover { text-decoration: underline; }
+
+/* ── Submit button ── */
+.btn-register {
+    width: 100%;
+    background: linear-gradient(135deg, #8c1515, #be3835);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.3px;
+    margin-bottom: 16px;
+}
+.btn-register:hover  { opacity: 0.88; }
+.btn-register:active { transform: scale(0.98); }
+
+/* ── Login link ── */
+.login-link {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+}
+.login-link a {
+    color: #be3835;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-link a:hover { text-decoration: underline; }
+
+/* ── Divider ── */
+.divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 24px 0;
+}
+
+/* ── Section label ── */
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+    .site-header { flex-direction: column; height: auto; padding: 15px 20px; gap: 15px; text-align: center; }
+    .header-left { flex-direction: column; }
+    .form-card { padding: 30px 20px; border-radius: 12px; }
+    .two-col { grid-template-columns: 1fr; gap: 18px; }
+    .birth-row { flex-direction: column; }
+    .gender-pills { flex-wrap: wrap; }
+}

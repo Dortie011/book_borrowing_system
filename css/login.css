@@ -1,0 +1,190 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #8c1515 0%, #be3835 50%, #d4534f 100%);
+}
+
+/* ── Header ── */
+.site-header {
+    background: #ffffff;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    flex-shrink: 0;
+    z-index: 10;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.header-left img {
+    height: 55px;
+    width: auto;
+}
+.header-left .site-title h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    color: #111111;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.header-left .site-title p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #222222;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+.header-right a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #be3835;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: 1.5px solid #be3835;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+.header-right a:hover {
+    background: #be3835;
+    color: #fff;
+}
+
+/* ── Main / card wrapper ── */
+.main-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ── Login card ── */
+.login-card {
+    width: 420px;
+    background: #f8f8f8;
+    border-radius: 24px;
+    padding: 45px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.login-card .card-logo {
+    height: 80px;
+    width: auto;
+    margin-bottom: 15px;
+}
+.login-card h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 22px;
+    color: #1a1a1a;
+    font-weight: normal;
+    margin-bottom: 4px;
+}
+.login-card .subtitle {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 25px;
+}
+
+/* ── Input group ── */
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+    text-align: left;
+}
+.input-group .icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.input-group input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #333;
+    transition: border-color 0.2s;
+    outline: none;
+}
+.input-group input:focus {
+    border-color: #be3835;
+}
+
+/* ── Error message ── */
+#error-msg {
+    display: none;
+    color: #be3835;
+    font-size: 13px;
+    margin-bottom: 18px;
+    text-align: left;
+    background: #fff0f0;
+    border: 1px solid #f5c6c6;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+/* ── Submit button ── */
+.btn-login {
+    width: 100%;
+    background: linear-gradient(135deg, #8c1515, #be3835);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.3px;
+}
+.btn-login:hover  { opacity: 0.88; }
+.btn-login:active { transform: scale(0.98); }
+
+/* ── Signup link ── */
+.signup-text {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #666;
+}
+.signup-text a {
+    color: #be3835;
+    text-decoration: none;
+    font-weight: 600;
+}
+.signup-text a:hover { text-decoration: underline; }
+
+/* ── Divider ── */
+.divider {
+    height: 1px;
+    background: #e8e8e8;
+    margin: 20px 0;
+}
+
+@media (max-width: 640px) {
+    .site-header { flex-direction: column; height: auto; padding: 15px 20px; gap: 15px; text-align: center; }
+    .header-left { flex-direction: column; }
+    .login-card { padding: 30px 20px; box-shadow: none; border-radius: 12px; }
+    .main-area { padding: 20px 15px; align-items: flex-start; }
+}
