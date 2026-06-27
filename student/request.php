@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ins = $db->prepare("INSERT INTO requests (user_id, book_id, borrow_date, return_date, purpose, status) VALUES (?,?,?,?,?,'Pending')");
         $ins->bind_param('iisss', $user_id, $bk['id'], $borrow_date, $return_date, $purpose);
         $ins->execute();
-        header('Location: index.php?requested=1');
+        header('Location: home.php?requested=1');
         exit;
     }
 }

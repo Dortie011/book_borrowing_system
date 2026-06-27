@@ -174,7 +174,7 @@ $stmt2->close();
               <td><?= htmlspecialchars($book['title']) ?></td>
               <td><?= htmlspecialchars($book['author']) ?></td>
               <td><?= htmlspecialchars($book['category']) ?></td>
-              <td><?= $book['request_date'] ? date('M d, Y', strtotime($book['request_date'])) : 'N/A' ?></td>
+              <td><?= $book['borrow_date'] ? date('M d, Y', strtotime($book['borrow_date'])) : 'N/A' ?></td>
               <td><?= $book['return_date'] ? date('M d, Y', strtotime($book['return_date'])) : '—' ?></td>
               <td>
                 <?php

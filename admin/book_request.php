@@ -187,7 +187,7 @@ $stmt->close();
               if ($req['status'] === 'Approved') $badgeClass = 'badge-approved';
               elseif ($req['status'] === 'Rejected') $badgeClass = 'badge-rejected';
               $shortId      = strtoupper(substr((string)$req['id'], -6));
-              $borrowDate   = $req['request_date'] ? date('M d, Y', strtotime($req['request_date'])) : '—';
+              $borrowDate   = $req['borrow_date'] ? date('M d, Y', strtotime($req['borrow_date'])) : '—';
               $returnDate   = !empty($req['return_date']) ? date('M d, Y', strtotime($req['return_date'])) : '—';
               $modalId      = 'modal-' . $req['id'];
             ?>
