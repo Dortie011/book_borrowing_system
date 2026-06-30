@@ -132,7 +132,8 @@ body {
 .field-row input[type="email"],
 .field-row input[type="tel"],
 .field-row input[type="password"],
-.field-row input[type="number"] {
+.field-row input[type="number"],
+.field-row input[type="date"] {
     width: 100%;
     padding: 12px 15px;
     border: 1.5px solid #e0e0e0;
@@ -178,27 +179,6 @@ body {
     border-color: #8c1515;
 }
 .gender-pills label:hover {
-    border-color: #be3835;
-}
-
-/* ── Birth date row ── */
-.birth-row {
-    display: flex;
-    gap: 10px;
-}
-.birth-row input {
-    flex: 1;
-    padding: 12px 10px;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: #333;
-    text-align: center;
-    outline: none;
-    transition: border-color 0.2s;
-}
-.birth-row input:focus {
     border-color: #be3835;
 }
 

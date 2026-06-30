@@ -23,7 +23,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="nav-actions">
         <a href="home.php" class="nav-btn btn-home <?= ($current_page === 'home.php') ? 'active' : '' ?>">Home</a>
         <a href="category.php" class="nav-btn btn-books <?= ($current_page === 'category.php' || $current_page === 'book_detail.php') ? 'active' : '' ?>">Books</a>
-        <a href="request.php" class="nav-btn btn-request <?= ($current_page === 'request.php') ? 'active' : '' ?>">Book Request</a>
         <a href="profile.php" class="btn-profile <?= ($current_page === 'profile.php') ? 'active' : '' ?>" title="My Profile"><?= htmlspecialchars($navbar_initials) ?></a>
         <a href="../logout.php" data-confirm="Are you sure you want to log out?" class="btn-logout">Logout</a>
     </div>

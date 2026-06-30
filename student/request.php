@@ -27,15 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['book_title'] ?? '');
     $author = trim($_POST['author'] ?? '');
     $genre = trim($_POST['genre'] ?? '');
-    $dd1 = str_pad(trim($_POST['borrow_dd'] ?? ''), 2, '0', STR_PAD_LEFT);
-    $mm1 = str_pad(trim($_POST['borrow_mm'] ?? ''), 2, '0', STR_PAD_LEFT);
-    $yy1 = trim($_POST['borrow_yy'] ?? '');
-    $dd2 = str_pad(trim($_POST['return_dd'] ?? ''), 2, '0', STR_PAD_LEFT);
-    $mm2 = str_pad(trim($_POST['return_mm'] ?? ''), 2, '0', STR_PAD_LEFT);
-    $yy2 = trim($_POST['return_yy'] ?? '');
+    $borrow_date = trim($_POST['borrow_date'] ?? '');
+    $return_date = trim($_POST['return_date'] ?? '');
     $purpose = trim($_POST['purpose'] ?? '');
-    $borrow_date = "$yy1-$mm1-$dd1";
-    $return_date = "$yy2-$mm2-$dd2";
 
     // Resolve book
     if ($bid > 0) {
@@ -51,12 +45,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bk = $stmt->get_result()->fetch_assoc();
     }
 
+    $borrow_ts = strtotime($borrow_date);
+    $return_ts = strtotime($return_date);
+
     if (!$bk) {
         $error = "Book not found. Please check the title and author.";
-    } elseif (!$borrow_date || $borrow_date === '--' || !checkdate((int)$mm1, (int)$dd1, (int)$yy1)) {
+    } elseif (!$borrow_date || !$borrow_ts) {
         $error = "Please enter a valid borrow date.";
-    } elseif (!$return_date || $return_date === '--' || !checkdate((int)$mm2, (int)$dd2, (int)$yy2)) {
+    } elseif (!$return_date || !$return_ts) {
         $error = "Please enter a valid return date.";
+    } elseif ($return_ts < $borrow_ts) {
+        $error = "Return date cannot be before borrow date.";
     } else {
         $ins = $db->prepare("INSERT INTO requests (user_id, book_id, borrow_date, return_date, purpose, status) VALUES (?,?,?,?,?,'Pending')");
         $ins->bind_param('iisss', $user_id, $bk['id'], $borrow_date, $return_date, $purpose);
@@ -103,18 +102,23 @@ $db->close();
             <div class="form-group">
                 <label for="book-title">Book Title</label>
                 <input type="text" id="book-title" name="book_title" placeholder="Enter book title" required
-                    value="<?= htmlspecialchars($prefill['title'] ?? ($_POST['book_title'] ?? '')) ?>">
+                    value="<?= htmlspecialchars($prefill['title'] ?? ($_POST['book_title'] ?? '')) ?>"
+                    <?= $prefill ? 'readonly' : '' ?>>
             </div>
 
             <div class="form-group">
                 <label for="author">Author</label>
                 <input type="text" id="author" name="author" placeholder="Enter the author's name" required
-                    value="<?= htmlspecialchars($prefill['author'] ?? ($_POST['author'] ?? '')) ?>">
+                    value="<?= htmlspecialchars($prefill['author'] ?? ($_POST['author'] ?? '')) ?>"
+                    <?= $prefill ? 'readonly' : '' ?>>
             </div>
 
             <div class="form-group">
                 <label for="genre">Genre / Category</label>
-                <select id="genre" name="genre" required>
+                <?php if ($prefill): ?>
+                    <input type="hidden" name="genre" value="<?= htmlspecialchars($prefill['category']) ?>">
+                <?php endif; ?>
+                <select id="genre" name="<?= $prefill ? 'genre_disabled' : 'genre' ?>" required <?= $prefill ? 'disabled' : '' ?>>
                     <option value="" disabled <?= !($prefill || ($_POST['genre'] ?? '')) ? 'selected' : '' ?>>Select Genre</option>
                     <?php foreach (['Fiction','Non-Fiction','Science','History','Technology'] as $g): ?>
                     <option value="<?= $g ?>" <?= (($prefill['category'] ?? ($_POST['genre'] ?? '')) === $g) ? 'selected' : '' ?>><?= $g ?></option>
@@ -123,21 +127,15 @@ $db->close();
             </div>
 
             <div class="form-group">
-                <label>Preferred Borrow Date</label>
-                <div class="date-row">
-                    <input type="text" class="date-box" name="borrow_dd" placeholder="DD" maxlength="2" value="<?= htmlspecialchars($_POST['borrow_dd'] ?? '') ?>">
-                    <input type="text" class="date-box" name="borrow_mm" placeholder="MM" maxlength="2" value="<?= htmlspecialchars($_POST['borrow_mm'] ?? '') ?>">
-                    <input type="text" class="date-box wide" name="borrow_yy" placeholder="YYYY" maxlength="4" value="<?= htmlspecialchars($_POST['borrow_yy'] ?? '') ?>">
-                </div>
+                <label for="borrow_date">Preferred Borrow Date</label>
+                <input type="date" id="borrow_date" name="borrow_date" required
+                    value="<?= htmlspecialchars($_POST['borrow_date'] ?? '') ?>">
             </div>
 
             <div class="form-group">
-                <label>Preferred Return Date</label>
-                <div class="date-row">
-                    <input type="text" class="date-box" name="return_dd" placeholder="DD" maxlength="2" value="<?= htmlspecialchars($_POST['return_dd'] ?? '') ?>">
-                    <input type="text" class="date-box" name="return_mm" placeholder="MM" maxlength="2" value="<?= htmlspecialchars($_POST['return_mm'] ?? '') ?>">
-                    <input type="text" class="date-box wide" name="return_yy" placeholder="YYYY" maxlength="4" value="<?= htmlspecialchars($_POST['return_yy'] ?? '') ?>">
-                </div>
+                <label for="return_date">Preferred Return Date</label>
+                <input type="date" id="return_date" name="return_date" required
+                    value="<?= htmlspecialchars($_POST['return_date'] ?? '') ?>">
             </div>
 
             <div class="form-group">

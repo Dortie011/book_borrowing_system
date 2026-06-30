@@ -15,29 +15,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($id > 0) {
         if ($action === 'approve') {
-            // Get the book_id first
-            $stmt = $db->prepare("SELECT book_id FROM requests WHERE id = ?");
+            // Get book details and availability count first
+            $stmt = $db->prepare("SELECT r.book_id, b.title, b.available FROM requests r JOIN books b ON r.book_id = b.id WHERE r.id = ?");
             $stmt->bind_param('i', $id);
             $stmt->execute();
             $row = $stmt->get_result()->fetch_assoc();
             $stmt->close();
 
-            $upd = $db->prepare("UPDATE requests SET status='Approved' WHERE id = ?");
-            $upd->bind_param('i', $id);
-            $upd->execute();
-            $upd->close();
-
             if ($row) {
-                $decr = $db->prepare("UPDATE books SET available = available - 1 WHERE id = ? AND available > 0");
-                $decr->bind_param('i', $row['book_id']);
-                $decr->execute();
-                $decr->close();
+                if ((int)$row['available'] <= 0) {
+                    $_SESSION['error_msg'] = "Cannot approve request. No copies of '" . $row['title'] . "' are currently available.";
+                } else {
+                    $upd = $db->prepare("UPDATE requests SET status='Approved' WHERE id = ?");
+                    $upd->bind_param('i', $id);
+                    $upd->execute();
+                    $upd->close();
+
+                    $decr = $db->prepare("UPDATE books SET available = available - 1 WHERE id = ? AND available > 0");
+                    $decr->bind_param('i', $row['book_id']);
+                    $decr->execute();
+                    $decr->close();
+
+                    $_SESSION['success_msg'] = "Book request successfully approved.";
+                }
+            } else {
+                $_SESSION['error_msg'] = "Request not found.";
             }
         } elseif ($action === 'reject') {
             $upd = $db->prepare("UPDATE requests SET status='Rejected' WHERE id = ?");
             $upd->bind_param('i', $id);
             $upd->execute();
             $upd->close();
+            $_SESSION['success_msg'] = "Book request successfully rejected.";
+        } elseif ($action === 'return') {
+            // Get book details first
+            $stmt = $db->prepare("SELECT r.book_id, b.title FROM requests r JOIN books b ON r.book_id = b.id WHERE r.id = ?");
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $row = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+
+            if ($row) {
+                $upd = $db->prepare("UPDATE requests SET status='Returned' WHERE id = ?");
+                $upd->bind_param('i', $id);
+                $upd->execute();
+                $upd->close();
+
+                $incr = $db->prepare("UPDATE books SET available = available + 1 WHERE id = ?");
+                $incr->bind_param('i', $row['book_id']);
+                $incr->execute();
+                $incr->close();
+
+                $_SESSION['success_msg'] = "Book '" . $row['title'] . "' has been marked as returned.";
+            } else {
+                $_SESSION['error_msg'] = "Request not found.";
+            }
         }
     }
     // Redirect to avoid form re-submission
@@ -108,6 +140,19 @@ $stmt->close();
 <?php include 'navbar.php'; ?>
 
   <main class="main-content">
+    <?php if (isset($_SESSION['error_msg'])): ?>
+      <div class="alert-error" style="background:#f8d7da; color:#721c24; padding:15px; border-radius:8px; margin-bottom:20px; font-weight:600; border: 1px solid #f5c6cb;">
+        <?= htmlspecialchars($_SESSION['error_msg']) ?>
+      </div>
+      <?php unset($_SESSION['error_msg']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['success_msg'])): ?>
+      <div class="alert-success" style="background:#d4edda; color:#155724; padding:15px; border-radius:8px; margin-bottom:20px; font-weight:600; border: 1px solid #c3e6cb;">
+        <?= htmlspecialchars($_SESSION['success_msg']) ?>
+      </div>
+      <?php unset($_SESSION['success_msg']); ?>
+    <?php endif; ?>
+
     <div class="page-header">
       <h2>Book Requests</h2>
       <p>Review, approve, or reject student borrow requests.</p>
@@ -186,6 +231,7 @@ $stmt->close();
               $badgeClass = 'badge-pending';
               if ($req['status'] === 'Approved') $badgeClass = 'badge-approved';
               elseif ($req['status'] === 'Rejected') $badgeClass = 'badge-rejected';
+              elseif ($req['status'] === 'Returned') $badgeClass = 'badge-returned';
               $shortId      = strtoupper(substr((string)$req['id'], -6));
               $borrowDate   = $req['borrow_date'] ? date('M d, Y', strtotime($req['borrow_date'])) : '—';
               $returnDate   = !empty($req['return_date']) ? date('M d, Y', strtotime($req['return_date'])) : '—';
@@ -210,6 +256,20 @@ $stmt->close();
                     </svg>
                   </button>
 
+                  <?php if ($req['status'] === 'Approved'): ?>
+                  <form method="POST" style="display:inline;">
+                    <input type="hidden" name="action" value="return"/>
+                    <input type="hidden" name="id" value="<?= $req['id'] ?>"/>
+                    <button type="submit" class="btn-action btn-return"
+                            title="Mark as Returned"
+                            onclick="return confirm('Mark this book as Returned?')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                      </svg>
+                    </button>
+                  </form>
+                  <?php else: ?>
                   <form method="POST" style="display:inline;">
                     <input type="hidden" name="action" value="approve"/>
                     <input type="hidden" name="id" value="<?= $req['id'] ?>"/>
@@ -235,6 +295,7 @@ $stmt->close();
                       </svg>
                     </button>
                   </form>
+                  <?php endif; ?>
                 </div>
 
                 <div class="modal-overlay" id="<?= $modalId ?>">

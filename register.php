@@ -11,9 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender      = trim($_POST['gender']       ?? '');
     $email       = trim($_POST['email']        ?? '');
     $contact     = trim($_POST['contact']      ?? '');
-    $day         = trim($_POST['birth_day']    ?? '');
-    $month       = trim($_POST['birth_month']  ?? '');
-    $year        = trim($_POST['birth_year']   ?? '');
+    $birth_date  = trim($_POST['birth_date']   ?? '');
     $address     = trim($_POST['address']      ?? '');
     $password    = $_POST['password']          ?? '';
     $terms       = isset($_POST['terms']);
@@ -24,10 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!$terms) {
         $error = 'You must agree to the Terms and Conditions.';
     } else {
-        // Build birth date
-        $birth_date = null;
-        if ($year && $month && $day) {
-            $birth_date = sprintf('%04d-%02d-%02d', (int)$year, (int)$month, (int)$day);
+        if ($birth_date === '') {
+            $birth_date = null;
         }
 
         $hashed = password_hash($password, PASSWORD_DEFAULT);
@@ -169,15 +165,9 @@ $showSuccess = isset($_GET['registered']) && $_GET['registered'] == '1';
 
                 <!-- Birth Date -->
                 <div class="field-row">
-                    <label>Birth Date</label>
-                    <div class="birth-row">
-                        <input type="text" name="birth_day"   placeholder="DD"   maxlength="2"
-                               value="<?= htmlspecialchars($_POST['birth_day'] ?? '') ?>">
-                        <input type="text" name="birth_month" placeholder="MM"   maxlength="2"
-                               value="<?= htmlspecialchars($_POST['birth_month'] ?? '') ?>">
-                        <input type="text" name="birth_year"  placeholder="YYYY" maxlength="4"
-                               value="<?= htmlspecialchars($_POST['birth_year'] ?? '') ?>">
-                    </div>
+                    <label for="birth_date">Birth Date</label>
+                    <input type="date" id="birth_date" name="birth_date"
+                           value="<?= htmlspecialchars($_POST['birth_date'] ?? '') ?>">
                 </div>
 
                 <!-- Address -->

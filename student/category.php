@@ -127,7 +127,7 @@ $categories = ['All', 'Fiction', 'Non-Fiction', 'Science', 'History', 'Technolog
       </div>
     <?php else: ?>
       <?php foreach ($books as $book):
-        $is_available = (strtolower($book['status'] ?? 'available') === 'available');
+        $is_available = ((int)($book['available'] ?? 0) > 0);
         $cover_url    = !empty($book['image_path']) ? '../' . htmlspecialchars($book['image_path']) : '';
         $title_letter = strtoupper(mb_substr($book['title'], 0, 1));
       ?>

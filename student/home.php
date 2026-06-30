@@ -66,7 +66,7 @@ $showToast = isset($_GET['requested']);
         <p>Your gateway to over 3,000 carefully curated books, journals,<br>
            and resources. A space designed for exploration,<br>
            learning, and academic excellence.</p>
-        <a href="request.php" class="btn-hero">Request a Book</a>
+        <a href="category.php" class="btn-hero">Browse Books</a>
     </div>
 </section>
 

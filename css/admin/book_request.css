@@ -176,6 +176,7 @@ body {
 .badge-pending  { background: #fff3cd; color: #856404; }
 .badge-approved { background: #d4edda; color: #155724; }
 .badge-rejected { background: #f8d7da; color: #721c24; }
+.badge-returned { background: #e2f0fe; color: #1565c0; }
 
 /* Action buttons */
 .actions { display: flex; gap: 8px; align-items: center; }
@@ -193,6 +194,7 @@ body {
 .btn-view     { background: #e3f2fd; color: #1565c0; }
 .btn-approve  { background: #d4edda; color: #155724; }
 .btn-reject   { background: #f8d7da; color: #721c24; }
+.btn-return   { background: #e8f5e9; color: #2e7d32; }
 .btn-action svg { width: 16px; height: 16px; }
 
 /* Responsive Helpers */

@@ -25,14 +25,12 @@ if (!$book) {
     exit;
 }
 
-$is_available   = (strtolower($book['status'] ?? 'available') === 'available');
+$available_copies = (int)($book['available'] ?? 0);
+$total_copies     = (int)($book['quantity'] ?? 0);
+$is_available     = ($available_copies > 0);
 $cover_url      = !empty($book['image_path']) ? '../' . htmlspecialchars($book['image_path']) : '';
 $title_letter   = strtoupper(mb_substr($book['title'], 0, 1));
 $category       = $book['category'] ?? 'General';
-
-// Copies
-$available_copies = (int)($book['available_copies'] ?? ($is_available ? 1 : 0));
-$total_copies     = (int)($book['total_copies']     ?? 1);
 
 // Format year published
 $year_published = $book['year_published'] ?? $book['published_year'] ?? ($book['publish_year'] ?? 'N/A');

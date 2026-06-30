@@ -50,15 +50,18 @@ footer strong { color: #fff; }
 .form-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.09); }
 .form-group { margin-bottom: 22px; }
 .form-group label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
-.form-group input[type=text], .form-group select, .form-group textarea {
+.form-group input[type=text], .form-group input[type=date], .form-group select, .form-group textarea {
     width: 100%; padding: 12px 15px; border: 1.5px solid #e0e0e0; border-radius: 8px;
     font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
     transition: border-color 0.2s; background: #fafafa;
 }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #be3835; background: #fff; }
-.date-row { display: flex; gap: 10px; }
-.date-box { width: 80px !important; text-align: center; }
-.date-box.wide { width: 110px !important; }
+.form-group input[readonly], .form-group select[disabled] {
+    background-color: #f1f1f1 !important;
+    color: #888 !important;
+    cursor: not-allowed;
+    border-color: #d8d8d8 !important;
+}
 .btn-submit {
     width: 100%; padding: 14px; background: linear-gradient(135deg, #8c1515, #be3835);
     color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
